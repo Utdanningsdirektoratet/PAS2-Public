@@ -14,22 +14,19 @@ namespace UDIR.PAS2.Example.Client
         {
             const string baseAddress = "http://localhost:55037/";
 
-            //First try to issue request with no valid security cookie
-            IssueRequestWithCookie(null, baseAddress, "/api/ekstern/skoler/1234/prøveperioder/432/kandidater");
-
-            //then obtain cookie by logging in
+            //obtain cookie by logging in
             var cookie = Login(baseAddress);
 
             //Use the cookie to issue a request and display result
             IssueRequestWithCookie(cookie, baseAddress, "/api/ekstern/skoler/1234/prøveperioder/432/kandidater");
 
-            System.Console.ReadLine();
+            Console.ReadLine();
         }
 
         private static void IssueRequestWithCookie(Cookie cookie, string baseAddress, string relativeAddress)
         {
-            System.Console.WriteLine("Press enter to try to issue request with the newly obtained cookie");
-            System.Console.ReadLine();
+            Console.WriteLine("Press enter to try to issue request with the newly obtained cookie");
+            Console.ReadLine();
 
             var cookieContainer = new CookieContainer();
 
@@ -74,6 +71,7 @@ namespace UDIR.PAS2.Example.Client
                     <TimeStamp>{1}</TimeStamp>                                  
                   </ci:ClientIdentification>", nonce, timeStamp));
             }
+            
             xmlSignature.Sign();
 
             var signature = xmlSignature.ConvertToString();

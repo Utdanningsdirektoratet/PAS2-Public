@@ -11,7 +11,7 @@ namespace UDIR.PAS2.Example.Client.Extensions
         public static void Sign(this XmlDocument xmlDocument)
         {
             using (var stream = Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream("Example.External.Client.Console.Certificates.Testcert.pfx"))
+                .GetManifestResourceStream("UDIR.PAS2.Example.Client.Certificates.Testcert.pfx"))
             {
                 if (stream == null) return;
 
