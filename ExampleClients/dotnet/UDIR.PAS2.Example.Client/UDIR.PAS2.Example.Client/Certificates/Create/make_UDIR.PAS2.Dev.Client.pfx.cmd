@@ -1,0 +1,1 @@
+openssl pkcs12 -export -out UDIR.PAS2.Dev.Client.pfx -inkey UDIR.PAS2.Dev.Client.key -in UDIR.PAS2.Dev.Client.crt -certfile UDIR.PAS2.Dev.RootCA.crt

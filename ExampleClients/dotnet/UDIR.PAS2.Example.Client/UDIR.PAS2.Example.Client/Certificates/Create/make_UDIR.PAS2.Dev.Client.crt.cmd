@@ -1,0 +1,1 @@
+openssl x509 -req -days 730 -in UDIR.PAS2.Dev.Client.csr -CA UDIR.PAS2.Dev.RootCA.crt -CAkey UDIR.PAS2.Dev.RootCA.key -set_serial 123456789 -out UDIR.PAS2.Dev.Client.crt
