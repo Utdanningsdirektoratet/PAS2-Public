@@ -59,6 +59,19 @@
     <EmbeddedResource Include="Certificates\Testcert.pfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Include="Certificates\Create\make_UDIR.PAS2.Dev.Client.crt.cmd" />
+    <None Include="Certificates\Create\make_UDIR.PAS2.Dev.Client.csr.cmd" />
+    <None Include="Certificates\Create\make_UDIR.PAS2.Dev.Client.key.cmd" />
+    <None Include="Certificates\Create\make_UDIR.PAS2.Dev.Client.pfx.cmd" />
+    <None Include="Certificates\Create\make_UDIR.PAS2.Dev.RootCa.crt.cmd" />
+    <None Include="Certificates\Create\make_UDIR.PAS2.Dev.RootCa.key.cmd" />
+    <None Include="Certificates\Create\openssl.cnf" />
+    <None Include="Certificates\Create\UDIR.PAS2.Dev.Client.crt" />
+    <None Include="Certificates\Create\UDIR.PAS2.Dev.Client.csr" />
+    <None Include="Certificates\Create\UDIR.PAS2.Dev.Client.key" />
+    <None Include="Certificates\Create\UDIR.PAS2.Dev.Client.pfx" />
+    <None Include="Certificates\Create\UDIR.PAS2.Dev.RootCA.crt" />
+    <None Include="Certificates\Create\UDIR.PAS2.Dev.RootCA.key" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
