@@ -10,3 +10,8 @@ Vi vil legge ut nyttig informasjon i WIKI'en og dersom man har spørsmål eller 
 - Kode som legges her er ment som referanseimplemetasjoner slik at man raskt skal kunne komme i gang med egen implementasjon. Dersom det er noe som er uklart er det bare å ta kontakt med oss.
 - Dokumentasjon vil hovedsakelig ligge på WIKI siden og vil fortløpende oppdateres i utviklingsløpet
 - Ved ønsker, forbedringer, feil eller lignende legger man inn en issue så tar vi det med i vår prioritering av oppgaver
+
+#### Kontaktpersoner
+Vidar Kongsli (Systemarkitekt PAS2, vidar.kongsli@utdanningsdirektoratet.no)<br/>
+Espen Ekvang (Integrasjonsansvarlig PAS2, espen.ekvang@utdanningsdirektoratet.no) <br/>
+Nikolai Andersen (Teknisk ansvarlig PAS1, nikolai.andersen@utdanningsdirektoratet.no)

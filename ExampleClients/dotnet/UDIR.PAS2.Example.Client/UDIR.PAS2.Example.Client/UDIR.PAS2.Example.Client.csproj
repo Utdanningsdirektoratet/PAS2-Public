@@ -56,12 +56,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EmbeddedResource Include="Certificates\Testcert.pfx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Include="Certificates\Create\make_UDIR.PAS2.Dev.Client.crt.cmd" />
     <None Include="Certificates\Create\make_UDIR.PAS2.Dev.Client.csr.cmd" />
     <None Include="Certificates\Create\make_UDIR.PAS2.Dev.Client.key.cmd" />
+    <None Include="Certificates\Create\make_UDIR.PAS2.Dev.Client.keystore.cmd" />
     <None Include="Certificates\Create\make_UDIR.PAS2.Dev.Client.pfx.cmd" />
     <None Include="Certificates\Create\make_UDIR.PAS2.Dev.RootCa.crt.cmd" />
     <None Include="Certificates\Create\make_UDIR.PAS2.Dev.RootCa.key.cmd" />
@@ -69,12 +67,16 @@
     <None Include="Certificates\Create\UDIR.PAS2.Dev.Client.crt" />
     <None Include="Certificates\Create\UDIR.PAS2.Dev.Client.csr" />
     <None Include="Certificates\Create\UDIR.PAS2.Dev.Client.key" />
+    <None Include="Certificates\Create\UDIR.PAS2.Dev.Client.p12" />
     <None Include="Certificates\Create\UDIR.PAS2.Dev.Client.pfx" />
     <None Include="Certificates\Create\UDIR.PAS2.Dev.RootCA.crt" />
     <None Include="Certificates\Create\UDIR.PAS2.Dev.RootCA.key" />
+    <None Include="Certificates\Create\UDIR.PAS2.keystore" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Certificates\Testcert.pfx" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
