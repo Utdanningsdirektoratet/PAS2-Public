@@ -12,7 +12,7 @@ namespace UDIR.PAS2.Example.Client
     {
         static void Main(string[] args)
         {
-            const string baseAddress = "http://localhost:55037/";
+            const string baseAddress = "https://eksamen-tst2.udir.no/";
 
             //obtain cookie by logging in
             var cookie = Login(baseAddress);
