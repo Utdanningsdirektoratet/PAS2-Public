@@ -20,10 +20,13 @@ namespace UDIR.PAS2.Example.Client.Extensions
                 var signingCert = new X509Certificate2(bytes);
                 var signedXml = new SignedXml(xmlDocument);
                 var keyInfo = new KeyInfo();
+                var reference = new Reference { Uri = string.Empty };
+
                 keyInfo.AddClause(new KeyInfoX509Data(signingCert));
-                signedXml.KeyInfo = keyInfo;
                 signedXml.SigningKey = signingCert.PrivateKey;
-                var reference = new Reference {Uri = string.Empty};
+                signedXml.KeyInfo = keyInfo;
+                signedXml.SignedInfo.CanonicalizationMethod = SignedXml.XmlDsigExcC14NTransformUrl;
+                
                 reference.AddTransform(new XmlDsigEnvelopedSignatureTransform());
                 signedXml.AddReference(reference);
                 signedXml.ComputeSignature();
