@@ -12,6 +12,6 @@ Vi vil legge ut nyttig informasjon i WIKI'en og dersom man har spørsmål eller 
 - Ved ønsker, forbedringer, feil eller lignende legger man inn en issue så tar vi det med i vår prioritering av oppgaver
 
 #### Kontaktpersoner
-Vidar Kongsli (Systemarkitekt, vidar.kongsli@utdanningsdirektoratet.no)<br/>
-Espen Ekvang (Integrasjonsansvarlig, espen.ekvang@utdanningsdirektoratet.no) <br/>
-Nikolai Andersen (Teknisk ansvarlig PAS, nikolai.andersen@utdanningsdirektoratet.no)
+Vidar Kongsli (Systemarkitekt PAS2, vidar.kongsli@utdanningsdirektoratet.no)<br/>
+Espen Ekvang (Integrasjonsansvarlig PAS2, espen.ekvang@utdanningsdirektoratet.no) <br/>
+Nikolai Andersen (Teknisk ansvarlig PAS1, nikolai.andersen@utdanningsdirektoratet.no)
