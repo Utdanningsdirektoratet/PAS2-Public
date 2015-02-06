@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.Key;
@@ -60,13 +59,14 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.net.ssl.HttpsURLConnection;	
 
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class SignatureExample {
-	private static String baseAddress = "http://localhost:55037/";
+	private static String baseAddress = "https://eksamen-tst2.udir.no";
 
 	public static void main(String[] args) {
 		try {
@@ -111,7 +111,7 @@ public class SignatureExample {
 
 		// Posting to login API
 		URL obj = new URL(baseAddress + "/api/ekstern/innlogging");
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
 		// add request header
 		con.setRequestMethod("POST");
@@ -212,7 +212,7 @@ public class SignatureExample {
 		System.in.read();
 
 		URL obj = new URL(baseAddress + relativeAddress);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 		
 		// add the cookie
 		con.setRequestProperty("Cookie",cookie);
@@ -235,7 +235,7 @@ public class SignatureExample {
 
 	}
 
-	private static String getAuthCookie(HttpURLConnection con) {
+	private static String getAuthCookie(HttpsURLConnection con) {
 		String headerField = con.getHeaderField("Set-Cookie");
 		String[] cookies = headerField.split(";");
 		for (String cookie : cookies) {
