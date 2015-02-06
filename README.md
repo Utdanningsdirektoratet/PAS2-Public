@@ -13,6 +13,6 @@ Vi vil legge ut nyttig informasjon i WIKI'en og dersom man har spørsmål eller 
 - Dersom man har et spørsmål oppretter man også en issue for dette og legger på label 'question'. Allerede stilte spørsmål finnes [her](https://github.com/Utdanningsdirektoratet/PAS2-Public/issues?q=is%3Aquestion+is%3Aissue)
 
 #### Kontaktpersoner
-Vidar Kongsli (Systemarkitekt PAS2, vidar.kongsli@utdanningsdirektoratet.no)<br/>
-Espen Ekvang (Integrasjonsansvarlig PAS2, espen.ekvang@utdanningsdirektoratet.no) <br/>
-Nikolai Andersen (Teknisk ansvarlig PAS1, nikolai.andersen@utdanningsdirektoratet.no)
+Vidar Kongsli (Systemarkitekt PAS2)<br/>
+Espen Ekvang (Integrasjonsansvarlig PAS2) <br/>
+Nikolai Andersen (Teknisk ansvarlig PAS1)
