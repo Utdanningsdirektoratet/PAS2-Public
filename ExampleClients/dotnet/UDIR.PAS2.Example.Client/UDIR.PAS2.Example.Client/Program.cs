@@ -12,7 +12,7 @@ namespace UDIR.PAS2.Example.Client
     {
         static void Main(string[] args)
         {
-            const string baseAddress = "https://eksamen-tst2.udir.no/";
+            const string baseAddress = "http://localhost:55037/";
 
             //obtain cookie by logging in
             var cookie = Login(baseAddress);
@@ -52,7 +52,7 @@ namespace UDIR.PAS2.Example.Client
 
         private static Cookie Login(string baseAddress)
         {
-            var xmlSignature = new XmlDocument(){PreserveWhitespace = true};
+            var xmlSignature = new XmlDocument{PreserveWhitespace = true};
             using (var rng = new RNGCryptoServiceProvider())
             {
                 var nonceBytes = new byte[8];
@@ -62,7 +62,8 @@ namespace UDIR.PAS2.Example.Client
                 var timeStamp = DateTime.Now.ToString("s");
 
                 xmlSignature.LoadXml(
-                    string.Format(@"<ci:ClientIdentification 
+                    string.Format(@"<?xml version='1.0' encoding='UTF-8'?>
+                    <ci:ClientIdentification 
                         xmlns:xs='http://www.w3.org/2001/XMLSchema' 
                         xmlns:ci='http://pas.udir.no/ClientIdentification'>
                     <OrgNr>875561162</OrgNr>    
