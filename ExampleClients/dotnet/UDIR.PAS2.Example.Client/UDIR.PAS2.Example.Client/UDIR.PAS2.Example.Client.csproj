@@ -34,11 +34,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,13 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Certificates\Create\make_UDIR.PAS2.Dev.Client.crt.cmd" />
-    <None Include="Certificates\Create\make_UDIR.PAS2.Dev.Client.csr.cmd" />
-    <None Include="Certificates\Create\make_UDIR.PAS2.Dev.Client.key.cmd" />
-    <None Include="Certificates\Create\make_UDIR.PAS2.Dev.Client.keystore.cmd" />
-    <None Include="Certificates\Create\make_UDIR.PAS2.Dev.Client.pfx.cmd" />
-    <None Include="Certificates\Create\make_UDIR.PAS2.Dev.RootCa.crt.cmd" />
-    <None Include="Certificates\Create\make_UDIR.PAS2.Dev.RootCa.key.cmd" />
+    <None Include="Certificates\Create\05_make_UDIR.PAS2.Dev.Client.crt.cmd" />
+    <None Include="Certificates\Create\04_make_UDIR.PAS2.Dev.Client.csr.cmd" />
+    <None Include="Certificates\Create\03_make_UDIR.PAS2.Dev.Client.key.cmd" />
+    <None Include="Certificates\Create\07_make_UDIR.PAS2.Dev.Client.keystore.cmd" />
+    <None Include="Certificates\Create\06_make_UDIR.PAS2.Dev.Client.pfx.cmd" />
+    <None Include="Certificates\Create\02_make_UDIR.PAS2.Dev.RootCa.crt.cmd" />
+    <None Include="Certificates\Create\01_make_UDIR.PAS2.Dev.RootCa.key.cmd" />
     <None Include="Certificates\Create\openssl.cnf" />
     <None Include="Certificates\Create\UDIR.PAS2.Dev.Client.crt" />
     <None Include="Certificates\Create\UDIR.PAS2.Dev.Client.csr" />
@@ -75,7 +77,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Certificates\Testcert.pfx" />
+    <EmbeddedResource Include="Certificates\local.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Certificates\Create\README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

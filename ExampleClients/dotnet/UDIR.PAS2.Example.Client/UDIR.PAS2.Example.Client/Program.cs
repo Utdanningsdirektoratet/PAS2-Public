@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml;
 using UDIR.PAS2.Example.Client.Extensions;
 
@@ -10,15 +12,16 @@ namespace UDIR.PAS2.Example.Client
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
-            const string baseAddress = "http://localhost:55037/";
+             var baseAddress = ConfigurationManager.AppSettings["environmenturl"];
 
             //obtain cookie by logging in
             var cookie = Login(baseAddress);
+            Clipboard.SetText(cookie.ToString());
 
-            //Use the cookie to issue a request and display result
-            IssueRequestWithCookie(cookie, baseAddress, "/api/ekstern/skoler/1234/prøveperioder/432/kandidater");
+            Console.WriteLine("Cookie er kopiert til utklipstavlen. Trykk en tast for å lukke dette vinduet");
 
             Console.ReadLine();
         }
