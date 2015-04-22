@@ -66,14 +66,14 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class SignatureExample {
-	private static String baseAddress = "https://eksamen-tst2.udir.no";
+	private static String baseAddress = "https://eksamen-sas.udir.no";
 
 	public static void main(String[] args) {
 		try {
 			String cookie = login(baseAddress);
 			if (cookie != null && !cookie.isEmpty()) {
 				issueRequestWithCookie(
-						baseAddress,"/api/ekstern/skoler/1234/prøveperioder/432/kandidater",
+						baseAddress,"/api/ekstern/kandidat?orgno=874546852&periodekode=H-2015",
 						cookie);
 			}
 
@@ -95,7 +95,7 @@ public class SignatureExample {
 		Format formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		String timeStamp = formatter.format(new Date());
 
-		String xmlString = String.format("<ci:ClientIdentification "
+		String xmlString = String.format("<?xml version='1.0' encoding='UTF-8'?><ci:ClientIdentification "
 				+ "xmlns:xs='http://www.w3.org/2001/XMLSchema' "
 				+ "xmlns:ci='http://pas.udir.no/ClientIdentification'>"
 				+ "<OrgNr>875561162</OrgNr> " + "<User>skoleadmin</User> "
