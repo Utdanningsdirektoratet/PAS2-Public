@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -48,8 +49,8 @@ namespace UDIR.PAS2.Example.Client
                 client.BaseAddress = new Uri(baseAddress);
                 var response = client.GetAsync(relativeAddress).Result;
 
-                System.Console.WriteLine(response);
-                System.Console.WriteLine(response.Content.ReadAsStringAsync().Result);
+                Console.WriteLine(response);
+                Console.WriteLine(response.Content.ReadAsStringAsync().Result);
             }
         }
 
@@ -69,8 +70,9 @@ namespace UDIR.PAS2.Example.Client
                     <ci:ClientIdentification 
                         xmlns:xs='http://www.w3.org/2001/XMLSchema' 
                         xmlns:ci='http://pas.udir.no/ClientIdentification'>
-                    <OrgNr>875561162</OrgNr>    
-                    <User>skoleadmin</User>
+                    <Skoleorgno>875561162</Skoleorgno>    
+                    <Skolenavn>En skole</Skolenavn>
+                    <Brukernavn>skoleadmin</Brukernavn>
                     <Nonce>{0}</Nonce>
                     <TimeStamp>{1}</TimeStamp>                                  
                   </ci:ClientIdentification>", nonce, timeStamp));
@@ -79,7 +81,7 @@ namespace UDIR.PAS2.Example.Client
             xmlSignature.Sign();
 
             var signature = xmlSignature.ConvertToString();
-
+            
             var handler = new WebRequestHandler
             {
                 CookieContainer = new CookieContainer(),

@@ -98,8 +98,11 @@ public class SignatureExample {
 		String xmlString = String.format("<?xml version='1.0' encoding='UTF-8'?><ci:ClientIdentification "
 				+ "xmlns:xs='http://www.w3.org/2001/XMLSchema' "
 				+ "xmlns:ci='http://pas.udir.no/ClientIdentification'>"
-				+ "<OrgNr>875561162</OrgNr> " + "<User>skoleadmin</User> "
-				+ "<Nonce>%s</Nonce> " + "<TimeStamp>%s</TimeStamp> "
+				+ "<Skoleorgno>875561162</Skoleorgno>" 
+				+ "<Skolenavn>En skole</Skolenavn>"
+				+ "<Brukernavn>skoleadmin</Brukernavn> "
+				+ "<Nonce>%s</Nonce> " 
+				+ "<TimeStamp>%s</TimeStamp> "
 				+ "</ci:ClientIdentification>", nonce, timeStamp);
 
 		DocumentBuilder builder = DocumentBuilderFactory.newInstance()
