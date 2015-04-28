@@ -90,7 +90,13 @@ namespace UDIR.PAS2.Example.Client
             using (var client = new HttpClient(handler))
             {
                 client.BaseAddress = new Uri(baseAddress);
-                Task.WaitAll(client.PostAsync("/api/ekstern/innlogging", new StringContent(signature)));
+                var response = client.PostAsync("/api/ekstern/innlogging", new StringContent(signature)).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    Console.Error.WriteLine("Response: " + response.StatusCode);
+                    Console.Error.WriteLine("So quitting...");
+                    Environment.Exit(1);
+                }
 
                 var allcookies = handler.CookieContainer.GetCookies(new Uri(baseAddress));
 

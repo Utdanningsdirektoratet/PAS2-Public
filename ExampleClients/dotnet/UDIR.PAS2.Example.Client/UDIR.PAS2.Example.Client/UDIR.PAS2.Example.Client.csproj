@@ -77,9 +77,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Certificates\local.pfx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Certificates\Create\README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
