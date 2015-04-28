@@ -235,7 +235,13 @@ public class SignatureExample {
 
 	}
 
-	private static String getAuthCookie(HttpsURLConnection con) {
+	private static String getAuthCookie(HttpsURLConnection con) throws IOException {
+		int responseCode = con.getResponseCode();
+		if (responseCode != 200) {
+			System.err.println("Response code: " + responseCode);
+			System.err.println("So quitting...");
+			System.exit(1);
+		}
 		String headerField = con.getHeaderField("Set-Cookie");
 		String[] cookies = headerField.split(";");
 		for (String cookie : cookies) {
