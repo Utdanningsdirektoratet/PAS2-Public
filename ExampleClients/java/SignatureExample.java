@@ -95,11 +95,14 @@ public class SignatureExample {
 		Format formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		String timeStamp = formatter.format(new Date());
 
-		String xmlString = String.format("<?xml version='1.0' encoding='UTF-8'?><ci:ClientIdentification "
-				+ "xmlns:xs='http://www.w3.org/2001/XMLSchema' "
+		String xmlString = String.format("<?xml version='1.0' encoding='UTF-8'?>"
+				+ "<ci:ClientIdentification xmlns:xs='http://www.w3.org/2001/XMLSchema' "
 				+ "xmlns:ci='http://pas.udir.no/ClientIdentification'>"
-				+ "<OrgNr>875561162</OrgNr> " + "<User>skoleadmin</User> "
-				+ "<Nonce>%s</Nonce> " + "<TimeStamp>%s</TimeStamp> "
+				+ "<Skoleorgno>875561162</Skoleorgno> " 
+				+ "<Skolenavn>Eksempel skole</Skolenavn> "
+				+ "<Brukernavn>skoleadmin</Brukernavn> "
+				+ "<Nonce>%s</Nonce> " 
+				+ "<TimeStamp>%s</TimeStamp> "
 				+ "</ci:ClientIdentification>", nonce, timeStamp);
 
 		DocumentBuilder builder = DocumentBuilderFactory.newInstance()
@@ -261,7 +264,7 @@ public class SignatureExample {
 			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
 			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
 			transformer.setOutputProperty(OutputKeys.INDENT, "no");
-			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-16");
+			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
 			transformer.transform(new DOMSource(doc), new StreamResult(sw));
 			String returnValue = sw.toString();
