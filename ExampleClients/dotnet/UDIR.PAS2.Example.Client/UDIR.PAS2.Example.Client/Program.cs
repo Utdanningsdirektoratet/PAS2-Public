@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml;
 using UDIR.PAS2.Example.Client.Extensions;
 
@@ -10,15 +12,16 @@ namespace UDIR.PAS2.Example.Client
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
-            const string baseAddress = "https://eksamen-tst2.udir.no/";
+             var baseAddress = ConfigurationManager.AppSettings["environmenturl"];
 
             //obtain cookie by logging in
             var cookie = Login(baseAddress);
+            Clipboard.SetText(cookie.ToString());
 
-            //Use the cookie to issue a request and display result
-            IssueRequestWithCookie(cookie, baseAddress, "/api/ekstern/skoler/1234/prøveperioder/432/kandidater");
+            Console.WriteLine("Cookie er kopiert til utklipstavlen. Trykk en tast for å lukke dette vinduet");
 
             Console.ReadLine();
         }
@@ -52,7 +55,7 @@ namespace UDIR.PAS2.Example.Client
 
         private static Cookie Login(string baseAddress)
         {
-            var xmlSignature = new XmlDocument(){PreserveWhitespace = true};
+            var xmlSignature = new XmlDocument{PreserveWhitespace = true};
             using (var rng = new RNGCryptoServiceProvider())
             {
                 var nonceBytes = new byte[8];
@@ -62,7 +65,8 @@ namespace UDIR.PAS2.Example.Client
                 var timeStamp = DateTime.Now.ToString("s");
 
                 xmlSignature.LoadXml(
-                    string.Format(@"<ci:ClientIdentification 
+                    string.Format(@"<?xml version='1.0' encoding='UTF-8'?>
+                    <ci:ClientIdentification 
                         xmlns:xs='http://www.w3.org/2001/XMLSchema' 
                         xmlns:ci='http://pas.udir.no/ClientIdentification'>
                     <OrgNr>875561162</OrgNr>    
@@ -86,7 +90,13 @@ namespace UDIR.PAS2.Example.Client
             using (var client = new HttpClient(handler))
             {
                 client.BaseAddress = new Uri(baseAddress);
-                Task.WaitAll(client.PostAsync("/api/ekstern/innlogging", new StringContent(signature)));
+                var response = client.PostAsync("/api/ekstern/innlogging", new StringContent(signature)).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    Console.Error.WriteLine("Response: " + response.StatusCode);
+                    Console.Error.WriteLine("So quitting...");
+                    Environment.Exit(1);
+                }
 
                 var allcookies = handler.CookieContainer.GetCookies(new Uri(baseAddress));
 

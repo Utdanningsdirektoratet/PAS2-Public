@@ -1,7 +1,7 @@
-### Java eksempel implementasjon
-I denne mappet finner man et eksempel på hvordan man kan bruke det eksternt API eksponert av PAS.
+### Java eksempelimplementasjon
+I denne mappen finner man et eksempel på hvordan man kan bruke det eksterne APIet eksponert av PAS.
 
-### Hvordan bruke denne eksempel applikasjonen?
-- Naviger til mappen der duy har sjekket ut koden
-- Compiler programmet med komandoen `javac.exe SignatureExample.java`
-- Kjør programmet komandoen `java.exe SignatureExample`
+### Hvordan bruke denne eksempelapplikasjonen?
+- Naviger til mappen der du har sjekket ut koden
+- Kompiler programmet med kommandoen `javac.exe SignatureExample.java`
+- Kjør programmet med kommandoen `java.exe SignatureExample`

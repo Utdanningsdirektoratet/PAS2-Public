@@ -1,0 +1,1 @@
+﻿http://blog.didierstevens.com/2008/12/30/howto-make-your-own-cert-with-openssl/

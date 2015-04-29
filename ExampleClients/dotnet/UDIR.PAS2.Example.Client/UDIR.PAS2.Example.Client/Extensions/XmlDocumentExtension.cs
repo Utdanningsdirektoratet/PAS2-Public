@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Configuration;
+using System.IO;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
@@ -10,8 +11,10 @@ namespace UDIR.PAS2.Example.Client.Extensions
     {
         public static void Sign(this XmlDocument xmlDocument)
         {
+            var certificate = ConfigurationManager.AppSettings["certificateToUse"];
+            
             using (var stream = Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream("UDIR.PAS2.Example.Client.Certificates.Testcert.pfx"))
+                .GetManifestResourceStream(certificate))
             {
                 if (stream == null) return;
 
