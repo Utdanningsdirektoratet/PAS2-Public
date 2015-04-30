@@ -74,6 +74,9 @@
     <None Include="Certificates\Create\UDIR.PAS2.Dev.RootCA.crt" />
     <None Include="Certificates\Create\UDIR.PAS2.Dev.RootCA.key" />
     <None Include="Certificates\Create\UDIR.PAS2.keystore" />
+    <EmbeddedResource Include="Certificates\local.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

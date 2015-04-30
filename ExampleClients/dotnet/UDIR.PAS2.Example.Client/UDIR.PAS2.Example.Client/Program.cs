@@ -69,8 +69,9 @@ namespace UDIR.PAS2.Example.Client
                     <ci:ClientIdentification 
                         xmlns:xs='http://www.w3.org/2001/XMLSchema' 
                         xmlns:ci='http://pas.udir.no/ClientIdentification'>
-                    <OrgNr>875561162</OrgNr>    
-                    <User>skoleadmin</User>
+                    <Skoleorgno>875561162</Skoleorgno>
+				    <Skolenavn>Eksempel skole</Skolenavn>
+				    <Brukernavn>skoleadmin</Brukernavn>
                     <Nonce>{0}</Nonce>
                     <TimeStamp>{1}</TimeStamp>                                  
                   </ci:ClientIdentification>", nonce, timeStamp));
