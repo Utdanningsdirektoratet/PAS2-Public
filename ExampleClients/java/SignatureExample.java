@@ -95,11 +95,11 @@ public class SignatureExample {
 		Format formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		String timeStamp = formatter.format(new Date());
 
-		String xmlString = String.format("<?xml version='1.0' encoding='UTF-8'?><ci:ClientIdentification "
-				+ "xmlns:xs='http://www.w3.org/2001/XMLSchema' "
+		String xmlString = String.format("<?xml version='1.0' encoding='UTF-8'?>"
+				+ "<ci:ClientIdentification xmlns:xs='http://www.w3.org/2001/XMLSchema' "
 				+ "xmlns:ci='http://pas.udir.no/ClientIdentification'>"
-				+ "<Skoleorgno>875561162</Skoleorgno>" 
-				+ "<Skolenavn>En skole</Skolenavn>"
+				+ "<Skoleorgno>875561162</Skoleorgno> " 
+				+ "<Skolenavn>Eksempel skole</Skolenavn> "
 				+ "<Brukernavn>skoleadmin</Brukernavn> "
 				+ "<Nonce>%s</Nonce> " 
 				+ "<TimeStamp>%s</TimeStamp> "
@@ -238,7 +238,13 @@ public class SignatureExample {
 
 	}
 
-	private static String getAuthCookie(HttpsURLConnection con) {
+	private static String getAuthCookie(HttpsURLConnection con) throws IOException {
+		int responseCode = con.getResponseCode();
+		if (responseCode != 200) {
+			System.err.println("Response code: " + responseCode);
+			System.err.println("So quitting...");
+			System.exit(1);
+		}
 		String headerField = con.getHeaderField("Set-Cookie");
 		String[] cookies = headerField.split(";");
 		for (String cookie : cookies) {
@@ -258,7 +264,7 @@ public class SignatureExample {
 			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
 			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
 			transformer.setOutputProperty(OutputKeys.INDENT, "no");
-			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-16");
+			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
 			transformer.transform(new DOMSource(doc), new StreamResult(sw));
 			String returnValue = sw.toString();

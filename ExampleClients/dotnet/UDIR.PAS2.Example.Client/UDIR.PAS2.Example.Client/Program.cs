@@ -3,7 +3,6 @@ using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -49,8 +48,8 @@ namespace UDIR.PAS2.Example.Client
                 client.BaseAddress = new Uri(baseAddress);
                 var response = client.GetAsync(relativeAddress).Result;
 
-                Console.WriteLine(response);
-                Console.WriteLine(response.Content.ReadAsStringAsync().Result);
+                System.Console.WriteLine(response);
+                System.Console.WriteLine(response.Content.ReadAsStringAsync().Result);
             }
         }
 
@@ -70,9 +69,9 @@ namespace UDIR.PAS2.Example.Client
                     <ci:ClientIdentification 
                         xmlns:xs='http://www.w3.org/2001/XMLSchema' 
                         xmlns:ci='http://pas.udir.no/ClientIdentification'>
-                    <Skoleorgno>875561162</Skoleorgno>    
-                    <Skolenavn>En skole</Skolenavn>
-                    <Brukernavn>skoleadmin</Brukernavn>
+                    <Skoleorgno>875561162</Skoleorgno>
+				    <Skolenavn>Eksempel skole</Skolenavn>
+				    <Brukernavn>skoleadmin</Brukernavn>
                     <Nonce>{0}</Nonce>
                     <TimeStamp>{1}</TimeStamp>                                  
                   </ci:ClientIdentification>", nonce, timeStamp));
@@ -81,7 +80,7 @@ namespace UDIR.PAS2.Example.Client
             xmlSignature.Sign();
 
             var signature = xmlSignature.ConvertToString();
-            
+
             var handler = new WebRequestHandler
             {
                 CookieContainer = new CookieContainer(),
@@ -92,7 +91,13 @@ namespace UDIR.PAS2.Example.Client
             using (var client = new HttpClient(handler))
             {
                 client.BaseAddress = new Uri(baseAddress);
-                Task.WaitAll(client.PostAsync("/api/ekstern/innlogging", new StringContent(signature)));
+                var response = client.PostAsync("/api/ekstern/innlogging", new StringContent(signature)).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    Console.Error.WriteLine("Response: " + response.StatusCode);
+                    Console.Error.WriteLine("So quitting...");
+                    Environment.Exit(1);
+                }
 
                 var allcookies = handler.CookieContainer.GetCookies(new Uri(baseAddress));
 
