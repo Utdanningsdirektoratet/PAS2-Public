@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\GeneratedClasses.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\XmlDocumentExtension.cs" />
     <Compile Include="Program.cs" />
@@ -81,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Certificates\Create\README.txt" />
+    <Content Include="README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Configuration;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Serialization;
+using UDIR.PAS2.Example.Client.Contracts;
 using UDIR.PAS2.Example.Client.Extensions;
 
 namespace UDIR.PAS2.Example.Client
@@ -48,33 +51,58 @@ namespace UDIR.PAS2.Example.Client
                 client.BaseAddress = new Uri(baseAddress);
                 var response = client.GetAsync(relativeAddress).Result;
 
-                System.Console.WriteLine(response);
-                System.Console.WriteLine(response.Content.ReadAsStringAsync().Result);
+                Console.WriteLine(response);
+                Console.WriteLine(response.Content.ReadAsStringAsync().Result);
             }
         }
 
         private static Cookie Login(string baseAddress)
         {
             var xmlSignature = new XmlDocument{PreserveWhitespace = true};
+
             using (var rng = new RNGCryptoServiceProvider())
             {
                 var nonceBytes = new byte[8];
                 rng.GetBytes(nonceBytes);
 
                 var nonce = Convert.ToBase64String(nonceBytes);
-                var timeStamp = DateTime.Now.ToString("s");
+                var timeStamp = DateTime.Now;
+                var clientIdentification = new ClientIdentification
+                {
+                    Skoleorgno = "875561162",
+                    Skolenavn = "Eksempel skole",
+                    Brukernavn = "skoleadmin",
+                    Nonce = nonce,
+                    TimeStamp = timeStamp
+                };
+                
+                string theSerializedString;
+                using (var ms = new MemoryStream())
+                {
+                    var xmlWriterSettings = new XmlWriterSettings()
+                    {
+                        CloseOutput = false,
+                        Encoding = Encoding.UTF8,
+                        OmitXmlDeclaration = false,
+                        Indent = true
+                    };
+                    using (var xw = XmlWriter.Create(ms, xmlWriterSettings))
+                    {
+                        var xmlSerializer = new XmlSerializer(typeof(ClientIdentification));
+                        xmlSerializer.Serialize(xw, clientIdentification);
+                    }
 
-                xmlSignature.LoadXml(
-                    string.Format(@"<?xml version='1.0' encoding='UTF-8'?>
-                    <ci:ClientIdentification 
-                        xmlns:xs='http://www.w3.org/2001/XMLSchema' 
-                        xmlns:ci='http://pas.udir.no/ClientIdentification'>
-                    <Skoleorgno>875561162</Skoleorgno>
-				    <Skolenavn>Eksempel skole</Skolenavn>
-				    <Brukernavn>skoleadmin</Brukernavn>
-                    <Nonce>{0}</Nonce>
-                    <TimeStamp>{1}</TimeStamp>                                  
-                  </ci:ClientIdentification>", nonce, timeStamp));
+                    theSerializedString = Encoding.UTF8.GetString(ms.ToArray());
+
+                    //remove BOM
+                    var byteOrderMarkUtf8 = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble());
+                    if (theSerializedString.StartsWith(byteOrderMarkUtf8))
+                    {
+                        theSerializedString = theSerializedString.Remove(0, byteOrderMarkUtf8.Length);
+                    }
+                }
+
+                xmlSignature.LoadXml(theSerializedString);
             }
             
             xmlSignature.Sign();
