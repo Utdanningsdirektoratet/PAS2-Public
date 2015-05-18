@@ -6,7 +6,7 @@ I denne mappen finner man et eksempel på hvordan man kan bruke det eksterne API
 - Kompiler programmet med kommandoen `javac.exe SignatureExample.java`
 - Kjør programmet med kommandoen `java.exe SignatureExample`
 
-## Generer klasser fra XSD
+## Generere klasser fra XSD
 1. Hent ned XSD fra {url til testmiljø}~/api/ekstern/skjema
 2. Pakk ut zip filen i en selvvalgt mappe
 3. Gå inn i den utpakkede mappen
