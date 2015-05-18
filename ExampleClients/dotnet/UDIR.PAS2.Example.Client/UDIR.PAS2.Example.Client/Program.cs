@@ -102,13 +102,14 @@ namespace UDIR.PAS2.Example.Client
                     }
                 }
 
+                
                 xmlSignature.LoadXml(theSerializedString);
             }
             
             xmlSignature.Sign();
 
             var signature = xmlSignature.ConvertToString();
-
+            //var validpayload = Convert.ToBase64String(Encoding.UTF8.GetBytes(signature));
             var handler = new WebRequestHandler
             {
                 CookieContainer = new CookieContainer(),
