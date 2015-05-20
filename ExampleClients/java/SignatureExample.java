@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.URL;
+import java.net.*;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.Key;
 import java.security.KeyStore;
@@ -74,7 +75,8 @@ public class SignatureExample {
 			if (cookie != null && !cookie.isEmpty()) {
 				issueRequestWithCookie(
 						baseAddress,"/api/ekstern/kandidat?orgno=874546852&periodekode=H-2015",
-						cookie);
+						cookie);		
+				logout(cookie );
 			}
 
 		} catch (Exception ex) {
@@ -82,6 +84,35 @@ public class SignatureExample {
 		}
 	}
 
+	private static void logout(String cookie)
+			throws MalformedURLException, ProtocolException, IOException{
+		
+		System.out.println("Now logging out...");
+		
+		URL obj = new URL(baseAddress + "/api/ekstern/utlogging");
+		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+		
+		// add the cookie
+		con.setRequestProperty("Cookie",cookie);
+		
+		// set content-length to 0
+		con.setFixedLengthStreamingMode(0);
+		
+		// set HTTP verb
+		con.setRequestMethod("POST");
+		con.setDoOutput(true);
+		
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();	
+	}
+	
 	private static String login(String baseAddress)
 			throws ParserConfigurationException, SAXException, IOException,
 			NoSuchAlgorithmException, InvalidAlgorithmParameterException,
