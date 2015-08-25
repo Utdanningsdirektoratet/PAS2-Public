@@ -18,15 +18,10 @@ public class EksamensplanExample {
 			JAXBContext jc = JAXBContext.newInstance(EksamensplanResponse.class);
 			InputStream xml = connection.getInputStream();			
 			
-			EksamensplanResponse eksamensplaner = (EksamensplanResponse) jc.createUnmarshaller().unmarshal(xml);
-			
-			System.out.println("Fagkoder i eksamensplanen:");
-			for(EksamensplanType eksamensplan : eksamensplaner.getEksamensplaner().getEksamensplan())
-			{
-				for(EksamenType eksamen : eksamensplan.getEksamener().getEksamen())
-				{
-					System.out.println(eksamen.getFagkode());
-				}
+			BufferedReader in = new BufferedReader(new InputStreamReader(xml));
+			String line = null;
+			while((line = in.readLine()) != null) {
+  				System.out.println(line);
 			}
 			
 			connection.disconnect();		
