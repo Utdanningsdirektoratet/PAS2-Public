@@ -1,0 +1,53 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
+           xmlns:ct='http://pas.udir.no/CommonTypes'
+           targetNamespace='http://pas.udir.no/CommonTypes'
+           elementFormDefault="qualified">
+
+    <xs:simpleType name="KandidattypeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Elev"/>
+            <xs:enumeration value="Privatist"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="SprakType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Bokmal"/>
+            <xs:enumeration value="Nynorsk"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="OpplaeringsnivaType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="GS"/>
+            <xs:enumeration value="VGS"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="KandidatgruppeansvarligeType">
+        <xs:sequence>
+            <xs:element name="Kandidatgruppeansvarlig" minOccurs="0" maxOccurs="unbounded" type="ct:KandidatgruppeansvarligType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="KandidatgruppeansvarligType">
+        <xs:sequence>
+            <xs:element name="Fodselsnr" type="xs:string" nillable="false"/>
+            <xs:element name="Fornavn" type="xs:string" nillable="false"/>
+            <xs:element name="Etternavn" type="xs:string" nillable="false"/>
+            <xs:element name="Malform" type="ct:SprakType" nillable="false" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Epostadresse" type="xs:string" nillable="true"/>
+            <xs:element name="Mobilnr" type="xs:string" nillable="true"/>
+        </xs:sequence>
+    </xs:complexType>
+
+  <xs:simpleType name="DeltakelsesstatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="D"/>
+      <xs:enumeration value="IDF"/>
+      <xs:enumeration value="DF"/>
+      <xs:enumeration value="MB"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pa:PameldteKandidater xmlns:ct="http://pas.udir.no/CommonTypes" 
+	xmlns:ko="http://pas.udir.no/Karakteroversikt" 
+	xmlns:ep="http://pas.udir.no/Eksamensplan" 
+	xmlns:pa="http://pas.udir.no/Pamelding">
+  <Eksamensperiodekode>V-2016</Eksamensperiodekode>
+  <Eksamenspameldinger>
+    <Eksamenspamelding>
+      <Fagkode>MAT0010</Fagkode>
+      <Variant />
+      <Kandidatgrupper>
+        <Kandidatgruppe>
+          <Navn>Klasse 6A</Navn>
+          <Kandidatgruppeansvarlige>
+            <ct:Kandidatgruppeansvarlig>
+              <ct:Fodselsnr>12116833563</ct:Fodselsnr>
+              <ct:Fornavn>Thor Arne</ct:Fornavn>
+              <ct:Etternavn>Johansen</ct:Etternavn>
+              <ct:Malform>Bokmal</ct:Malform>
+              <ct:Epostadresse>thjoha @oppad.no</ct:Epostadresse>
+              <ct:Mobilnr>90915134</ct:Mobilnr>
+            </ct:Kandidatgruppeansvarlig>
+          </Kandidatgruppeansvarlige>
+          <Kandidater>
+            <Kandidat>
+              <Fodselsnr>17011099955</Fodselsnr>
+              <Fornavn>Kristoffer Berg</Fornavn>
+              <Etternavn>Johansen</Etternavn>
+              <Malform>Bokmal</Malform>
+              <Kandidattype>Elev</Kandidattype>
+              <Kandidatnummer>564HBS-V</Kandidatnummer>
+            </Kandidat>
+            <Kandidat>
+              <Fodselsnr>13060099930</Fodselsnr>
+              <Fornavn>Kevin</Fornavn>
+              <Etternavn>Rønhovde</Etternavn>
+              <Malform>Bokmal</Malform>
+              <Kandidattype>Elev</Kandidattype>
+              <Kandidatnummer>639CRS-V</Kandidatnummer>
+            </Kandidat>
+          </Kandidater>
+        </Kandidatgruppe>
+      </Kandidatgrupper>
+    </Eksamenspamelding>
+  </Eksamenspameldinger>
+</pa:PameldteKandidater>

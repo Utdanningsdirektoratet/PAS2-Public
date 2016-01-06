@@ -1,0 +1,13 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
+           xmlns:pa='http://pas.udir.no/Pamelding'
+           targetNamespace='http://pas.udir.no/Pamelding'
+           elementFormDefault="qualified">
+    <xs:element name="ApiError">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Message" type="xs:string" nillable="false"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,84 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
+           xmlns:pa='http://pas.udir.no/Pamelding'
+           xmlns:ct='http://pas.udir.no/CommonTypes'
+           targetNamespace='http://pas.udir.no/Pamelding'
+           elementFormDefault="qualified">
+    <xs:import namespace="http://pas.udir.no/CommonTypes" schemaLocation="CommonTypes.xsd"/>
+    <xs:element name="PameldingReport">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Orgnr" type="xs:string" nillable="false"/>
+                <xs:element name="Skolenavn" type="xs:string" nillable="false"/>
+                <xs:element name="Kandidatgrupper" nillable="true" type="pa:KandidatgruppeReportsType"/>
+                <xs:element name="Status" nillable="false" type="pa:PameldingsStatusType"/>
+                <xs:element name="StatusMessage" nillable="true" type="xs:string"/>
+                <xs:element name="Eksamensperiode" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+ 
+    <xs:complexType name="KandidatgruppeReportsType">
+        <xs:sequence>
+            <xs:element name="Kandidatgruppe" minOccurs="0" maxOccurs="unbounded" type="pa:KandidatgruppeReportType"/>
+        </xs:sequence>
+    </xs:complexType>
+ 
+    <xs:complexType name="KandidatgruppeReportType">
+        <xs:sequence>
+            <xs:element name="Navn" type="xs:string" nillable="true"/>
+            <xs:element name="Fagkode" type="xs:string" nillable="false"/>
+			<xs:element name="Variant" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Opplaeringsniva" type="ct:OpplaeringsnivaType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Kandidatgruppeansvarlige" nillable="true" type="pa:KandidatgruppeansvarligReportsType"/>
+            <xs:element name="Kandidater" nillable="true" type="pa:KandidatReportsType"/>
+        </xs:sequence>
+    </xs:complexType>
+ 
+    <xs:complexType name="KandidatgruppeansvarligReportsType">
+        <xs:sequence>
+            <xs:element name="Kandidatgruppeansvarlig" minOccurs="0" maxOccurs="unbounded" type="pa:KandidatgruppeansvarligReportType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="KandidatgruppeansvarligReportType">
+        <xs:sequence>
+            <xs:element name="Fodselsnr" type="xs:string" nillable="false"/>
+        </xs:sequence>
+    </xs:complexType>
+ 
+    <xs:complexType name="KandidatReportsType">
+        <xs:sequence>
+            <xs:element name="Kandidat" minOccurs="0" maxOccurs="unbounded" type="pa:KandidatReportType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="KandidatReportType">
+        <xs:sequence>
+            <xs:element name="Fodselsnr" type="xs:string"/>
+            <xs:element name="Kandidatnr" type="xs:string"/>
+            <xs:element name="Status" type="pa:KandidatStatusType"/>
+            <xs:element name="StatusMessage" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="PameldingsStatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="IkkeStartet"/>
+            <xs:enumeration value="Startet"/>
+            <xs:enumeration value="Ferdig"/>
+            <xs:enumeration value="Feilet"/>
+            <xs:enumeration value="DelvisFerdig"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="KandidatStatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="IkkeStartet"/>
+            <xs:enumeration value="Pameldt"/>
+            <xs:enumeration value="IkkePameldt"/>
+            <xs:enumeration value="DelvisPameldt"/>
+            <xs:enumeration value="PameldtAnnenSkole"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

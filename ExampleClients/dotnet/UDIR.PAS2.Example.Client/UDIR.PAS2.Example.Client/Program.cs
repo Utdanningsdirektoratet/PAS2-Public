@@ -13,125 +13,127 @@ using UDIR.PAS2.Example.Client.Extensions;
 
 namespace UDIR.PAS2.Example.Client
 {
-    class Program
-    {
-        [STAThread]
-        static void Main(string[] args)
-        {
-             var baseAddress = ConfigurationManager.AppSettings["environmenturl"];
+	class Program
+	{
+		[STAThread]
+		static void Main(string[] args)
+		{
+			Deserialize.CanValidatePameldteKandidater();
 
-            //obtain cookie by logging in
-            var cookie = Login(baseAddress);
-            Clipboard.SetText(cookie.ToString());
+			var baseAddress = ConfigurationManager.AppSettings["environmenturl"];
 
-            Console.WriteLine("Cookie er kopiert til utklipstavlen. Trykk en tast for å lukke dette vinduet");
+			//obtain cookie by logging in
+			var cookie = Login(baseAddress);
+			Clipboard.SetText(cookie.ToString());
 
-            Console.ReadLine();
-        }
+			Console.WriteLine("Cookie er kopiert til utklipstavlen. Trykk en tast for å lukke dette vinduet");
 
-        private static void IssueRequestWithCookie(Cookie cookie, string baseAddress, string relativeAddress)
-        {
-            Console.WriteLine("Press enter to try to issue request with the newly obtained cookie");
-            Console.ReadLine();
+			Console.ReadLine();
+		}
 
-            var cookieContainer = new CookieContainer();
+		private static void IssueRequestWithCookie(Cookie cookie, string baseAddress, string relativeAddress)
+		{
+			Console.WriteLine("Press enter to try to issue request with the newly obtained cookie");
+			Console.ReadLine();
 
-            if(cookie != null)
-                cookieContainer.Add(cookie);
+			var cookieContainer = new CookieContainer();
 
-            var handler = new WebRequestHandler
-            {
-                CookieContainer = cookieContainer,
-                UseCookies = true,
-                UseDefaultCredentials = true
-            };
+			if (cookie != null)
+				cookieContainer.Add(cookie);
 
-            using (var client = new HttpClient(handler))
-            {
-                client.BaseAddress = new Uri(baseAddress);
-                var response = client.GetAsync(relativeAddress).Result;
+			var handler = new WebRequestHandler
+			{
+				CookieContainer = cookieContainer,
+				UseCookies = true,
+				UseDefaultCredentials = true
+			};
 
-                Console.WriteLine(response);
-                Console.WriteLine(response.Content.ReadAsStringAsync().Result);
-            }
-        }
+			using (var client = new HttpClient(handler))
+			{
+				client.BaseAddress = new Uri(baseAddress);
+				var response = client.GetAsync(relativeAddress).Result;
 
-        private static Cookie Login(string baseAddress)
-        {
-            var xmlSignature = new XmlDocument{PreserveWhitespace = true};
+				Console.WriteLine(response);
+				Console.WriteLine(response.Content.ReadAsStringAsync().Result);
+			}
+		}
 
-            using (var rng = new RNGCryptoServiceProvider())
-            {
-                var nonceBytes = new byte[8];
-                rng.GetBytes(nonceBytes);
+		private static Cookie Login(string baseAddress)
+		{
+			var xmlSignature = new XmlDocument { PreserveWhitespace = true };
 
-                var nonce = Convert.ToBase64String(nonceBytes);
-                var timeStamp = DateTime.Now;
-                var clientIdentification = new ClientIdentification
-                {
-                    Skoleorgno = "875561162",
-                    Skolenavn = "Eksempel skole",
-                    Brukernavn = "skoleadmin",
-                    Nonce = nonce,
-                    TimeStamp = timeStamp
-                };
-                
-                string theSerializedString;
-                using (var ms = new MemoryStream())
-                {
-                    var xmlWriterSettings = new XmlWriterSettings()
-                    {
-                        CloseOutput = false,
-                        Encoding = Encoding.UTF8,
-                        OmitXmlDeclaration = false,
-                        Indent = true
-                    };
-                    using (var xw = XmlWriter.Create(ms, xmlWriterSettings))
-                    {
-                        var xmlSerializer = new XmlSerializer(typeof(ClientIdentification));
-                        xmlSerializer.Serialize(xw, clientIdentification);
-                    }
+			using (var rng = new RNGCryptoServiceProvider())
+			{
+				var nonceBytes = new byte[8];
+				rng.GetBytes(nonceBytes);
 
-                    theSerializedString = Encoding.UTF8.GetString(ms.ToArray());
+				var nonce = Convert.ToBase64String(nonceBytes);
+				var timeStamp = DateTime.Now;
+				var clientIdentification = new ClientIdentification
+				{
+					Skoleorgno = "985500568",
+					Skolenavn = "Akademiet Drammen",
+					Brukernavn = "skoleadmin",
+					Nonce = nonce,
+					TimeStamp = timeStamp
+				};
 
-                    //remove BOM
-                    var byteOrderMarkUtf8 = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble());
-                    if (theSerializedString.StartsWith(byteOrderMarkUtf8))
-                    {
-                        theSerializedString = theSerializedString.Remove(0, byteOrderMarkUtf8.Length);
-                    }
-                }
+				string theSerializedString;
+				using (var ms = new MemoryStream())
+				{
+					var xmlWriterSettings = new XmlWriterSettings()
+					{
+						CloseOutput = false,
+						Encoding = Encoding.UTF8,
+						OmitXmlDeclaration = false,
+						Indent = true
+					};
+					using (var xw = XmlWriter.Create(ms, xmlWriterSettings))
+					{
+						var xmlSerializer = new XmlSerializer(typeof(ClientIdentification));
+						xmlSerializer.Serialize(xw, clientIdentification);
+					}
 
-                
-                xmlSignature.LoadXml(theSerializedString);
-            }
-            
-            xmlSignature.Sign();
+					theSerializedString = Encoding.UTF8.GetString(ms.ToArray());
 
-            var signature = xmlSignature.ConvertToString();
-            //var validpayload = Convert.ToBase64String(Encoding.UTF8.GetBytes(signature));
-            var handler = new WebRequestHandler
-            {
-                CookieContainer = new CookieContainer(),
-                UseCookies = true,
-                UseDefaultCredentials = true
-            };
+					//remove BOM
+					var byteOrderMarkUtf8 = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble());
+					if (theSerializedString.StartsWith(byteOrderMarkUtf8))
+					{
+						theSerializedString = theSerializedString.Remove(0, byteOrderMarkUtf8.Length);
+					}
+				}
 
-            using (var client = new HttpClient(handler))
-            {
-                client.BaseAddress = new Uri(baseAddress);
-                var response = client.PostAsync("/api/ekstern/innlogging", new StringContent(signature)).Result;
-                if (!response.IsSuccessStatusCode)
-                {
-                    Console.Error.WriteLine("Response: " + response.StatusCode);
-                    Console.Error.WriteLine("So quitting...");
-                    Environment.Exit(1);
-                }
 
-                var allcookies = handler.CookieContainer.GetCookies(new Uri(baseAddress));
+				xmlSignature.LoadXml(theSerializedString);
+			}
 
-                return allcookies["FedAuth"];
-            }
-        }
-    }
+			xmlSignature.Sign();
+
+			var signature = xmlSignature.ConvertToString();
+			//var validpayload = Convert.ToBase64String(Encoding.UTF8.GetBytes(signature));
+			var handler = new WebRequestHandler
+			{
+				CookieContainer = new CookieContainer(),
+				UseCookies = true,
+				UseDefaultCredentials = true
+			};
+
+			using (var client = new HttpClient(handler))
+			{
+				client.BaseAddress = new Uri(baseAddress);
+				var response = client.PostAsync("/api/ekstern/innlogging", new StringContent(signature)).Result;
+				if (!response.IsSuccessStatusCode)
+				{
+					Console.Error.WriteLine("Response: " + response.StatusCode);
+					Console.Error.WriteLine("So quitting...");
+					Environment.Exit(1);
+				}
+
+				var allcookies = handler.CookieContainer.GetCookies(new Uri(baseAddress));
+
+				return allcookies["FedAuth"];
+			}
+		}
+	}
 }

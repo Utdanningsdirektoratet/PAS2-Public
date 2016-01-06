@@ -1,0 +1,79 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?>
+<xs:schema xmlns:ep="http://pas.udir.no/Eksamensplan" 
+           elementFormDefault="qualified" 
+           targetNamespace="http://pas.udir.no/Eksamensplan"
+           xmlns:ct='http://pas.udir.no/CommonTypes'
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://pas.udir.no/CommonTypes" schemaLocation="CommonTypes.xsd"/>
+
+    <xs:element name="EksamensplanResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Eksamensplaner" nillable="true" type="ep:EksamensplanerType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:complexType name="EksamensplanerType">
+        <xs:sequence>
+            <xs:element name="Eksamensplan" minOccurs="0" maxOccurs="unbounded" type="ep:EksamensplanType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="EksamensplanType">
+        <xs:sequence>
+            <xs:element name="Opplaeringsniva" type="ct:OpplaeringsnivaType"/>
+            <xs:element name="Eksamensperiode" type="ep:EksamensperiodeType"/>
+            <xs:element name="Eksamener" type="ep:EksamenerType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EksamensperiodeType">
+        <xs:sequence>
+            <xs:element name="Kode" type="xs:string"/>
+            <xs:element name="PameldingStart" type="xs:dateTime"/>
+            <xs:element name="PameldingStopp" type="xs:dateTime"/>
+            <xs:element name="GjennomforingStart" type="xs:dateTime"/>
+            <xs:element name="GjennomforingStopp" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EksamenerType">
+        <xs:sequence>
+            <xs:element name="Eksamen" minOccurs="0" maxOccurs="unbounded" type="ep:EksamenType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EksamenType">
+        <xs:sequence>
+            <xs:element name="Fagkode" type="xs:string"/>
+			<xs:element name="Variant" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="Eksamensdeler" type="ep:EksamensdelerType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EksamensdelerType">
+        <xs:sequence>
+            <xs:element name="Eksamensdel" minOccurs="0" maxOccurs="unbounded" type="ep:EksamensdelType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EksamensdelType">
+        <xs:sequence>
+            <xs:element name="Type" type="ep:EksamensdeltypeType"/>
+            <xs:element name="GjennomforingStart" type="xs:dateTime"/>
+            <xs:element name="GjennomforingStopp" type="xs:dateTime"/>
+            <xs:element name="Varighet" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="EksamensdeltypeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Eksamen"/>
+            <xs:enumeration value="EksamenDel1"/>
+            <xs:enumeration value="EksamenDel2"/>
+            <xs:enumeration value="Forberedelse"/>
+        </xs:restriction>
+    </xs:simpleType>
+            
+</xs:schema>

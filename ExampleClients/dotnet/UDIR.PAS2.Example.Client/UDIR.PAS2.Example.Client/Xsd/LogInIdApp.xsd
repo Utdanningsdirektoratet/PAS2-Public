@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
+           xmlns:ci='http://pas.udir.no/ClientIdentification'
+           xmlns:ds='http://www.w3.org/2000/09/xmldsig#'
+           targetNamespace='http://pas.udir.no/ClientIdentification'
+           elementFormDefault="unqualified">
+    <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="Schemas\DigitalSignature.xsd"/>
+    <xs:element name='ClientIdentification'>
+        <xs:complexType>
+            <xs:all>
+                <xs:element name='Brukernavn' type='xs:string'/>
+                <xs:element name='Nonce' type='xs:string'/>
+                <xs:element name='TimeStamp' type='xs:dateTime'/>
+                <xs:element ref='ds:Signature'/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

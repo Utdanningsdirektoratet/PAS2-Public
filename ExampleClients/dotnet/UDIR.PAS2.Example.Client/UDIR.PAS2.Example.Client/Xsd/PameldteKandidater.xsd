@@ -1,0 +1,58 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
+           xmlns:pa='http://pas.udir.no/Pamelding'
+           xmlns:ct='http://pas.udir.no/CommonTypes'
+           targetNamespace='http://pas.udir.no/Pamelding'>
+    <xs:import namespace="http://pas.udir.no/CommonTypes" schemaLocation="CommonTypes.xsd"/>
+    <xs:element name='PameldteKandidater'>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name='Eksamensperiodekode' type='xs:string'/>
+                <xs:element name='Eksamenspameldinger' type='pa:EksamenspameldingerType'/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name='EksamenspameldingerType'>
+        <xs:sequence>
+            <xs:element name='Eksamenspamelding' minOccurs='0' maxOccurs='unbounded' type='pa:EksamenspameldingType'/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name='EksamenspameldingType'>
+        <xs:sequence>
+            <xs:element name='Fagkode' type='xs:string'/>
+			<xs:element name='Variant' type='xs:string' minOccurs='0' maxOccurs='1'/>
+            <xs:element name='Kandidatgrupper' type='pa:PameldteKandidatgrupperType'/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name='PameldteKandidatgrupperType'>
+        <xs:sequence>
+            <xs:element name='Kandidatgruppe' minOccurs='0' maxOccurs='unbounded' type='pa:PameldtKandidatgruppeType'/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name='PameldtKandidatgruppeType'>
+        <xs:sequence>
+            <xs:element name='Navn' type='xs:string'/>
+            <xs:element name='Kandidatgruppeansvarlige' type='ct:KandidatgruppeansvarligeType'/>
+            <xs:element name='Kandidater' type='pa:PameldteKandidaterType'/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PameldteKandidaterType">
+        <xs:sequence>
+            <xs:element name="Kandidat" minOccurs="0" maxOccurs="unbounded" type="pa:PameldtKandidatType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PameldtKandidatType">
+        <xs:sequence>
+            <xs:element name="Fodselsnr" type="xs:string"/>
+            <xs:element name="Fornavn" type="xs:string"/>
+            <xs:element name="Etternavn" type="xs:string"/>
+            <xs:element name="Malform" type="ct:SprakType" nillable="true"/>
+            <xs:element name="Kandidattype" type="ct:KandidattypeType"/>
+            <xs:element name="Kandidatnummer" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

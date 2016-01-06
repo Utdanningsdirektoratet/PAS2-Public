@@ -1,0 +1,60 @@
+﻿<?xml version='1.0' encoding='UTF-8' ?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
+           xmlns:ko='http://pas.udir.no/Karakteroversikt'
+           xmlns:ct='http://pas.udir.no/CommonTypes'
+           targetNamespace='http://pas.udir.no/Karakteroversikt'
+           elementFormDefault="qualified">
+    <xs:import namespace="http://pas.udir.no/CommonTypes" schemaLocation="CommonTypes.xsd"/>
+    <xs:element name="Karakteroversikt">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Skoleorgnr" type="xs:string" nillable="false"/>
+                <xs:element name="Eksamener" nillable="true" type="ko:EksamenerMedKarakterType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+  <xs:complexType name="EksamenerMedKarakterType">
+    <xs:sequence>
+      <xs:element name="Eksamen" minOccurs="0" maxOccurs="unbounded" type="ko:EksamenMedKarakterType"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="EksamenMedKarakterType">
+    <xs:sequence>
+      <xs:element name="Fagkode" type="xs:string" nillable="false"/>
+	  <xs:element name="Variant" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Kandidatgrupper" nillable="true" type="ko:KandidatgrupperMedKarakterType"/>
+    </xs:sequence>
+  </xs:complexType>
+ 
+    <xs:complexType name="KandidatgrupperMedKarakterType">
+        <xs:sequence>
+            <xs:element name="Kandidatgruppe" minOccurs="0" maxOccurs="unbounded" type="ko:KandidatgruppeMedKarakterType"/>
+        </xs:sequence>
+    </xs:complexType>
+ 
+    <xs:complexType name="KandidatgruppeMedKarakterType">
+        <xs:sequence>
+            <xs:element name="Navn" type="xs:string" nillable="true"/>
+            <xs:element name="Kandidater" nillable="true" type="ko:KandidaterMedKarakterType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="KandidaterMedKarakterType">
+        <xs:sequence>
+            <xs:element name="Kandidat" minOccurs="0" maxOccurs="unbounded" type="ko:KandidatMedKarakterType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="KandidatMedKarakterType">
+        <xs:sequence>
+            <xs:element name="Fodselsnr" type="xs:string"/>
+            <xs:element name="Kandidatnr" type="xs:string"/>
+            <xs:element name="Deltakelsesstatus" type="ct:DeltakelsesstatusType"/>
+            <xs:element name="Karakter" type="xs:int"/>
+			<xs:element name="Klagekarakter" type="xs:int" nillable="true"/>
+			<xs:element name="Klagebegrunnelse" type="xs:string" nillable="true"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
