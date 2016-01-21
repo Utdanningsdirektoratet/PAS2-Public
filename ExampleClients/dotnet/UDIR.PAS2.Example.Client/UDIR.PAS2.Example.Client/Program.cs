@@ -69,9 +69,9 @@ namespace UDIR.PAS2.Example.Client
                 var timeStamp = DateTime.Now;
                 var clientIdentification = new ClientIdentification
                 {
-                    Skoleorgno = "875561162",
-                    Skolenavn = "Eksempel skole",
-                    Brukernavn = "skoleadmin",
+                    Skoleorgno = ConfigurationManager.AppSettings["skoleorgno"],
+                    Skolenavn = ConfigurationManager.AppSettings["skolenavn"],
+                    Brukernavn = ConfigurationManager.AppSettings["brukernavn"],
                     Nonce = nonce,
                     TimeStamp = timeStamp
                 };
