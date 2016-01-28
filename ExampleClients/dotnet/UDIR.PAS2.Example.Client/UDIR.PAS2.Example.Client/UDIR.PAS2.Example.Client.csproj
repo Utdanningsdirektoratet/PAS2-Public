@@ -38,6 +38,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
@@ -58,7 +59,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Certificates\Create\05_make_UDIR.PAS2.Dev.Client.crt.cmd" />
     <None Include="Certificates\Create\04_make_UDIR.PAS2.Dev.Client.csr.cmd" />
     <None Include="Certificates\Create\03_make_UDIR.PAS2.Dev.Client.key.cmd" />
@@ -78,7 +81,9 @@
     <EmbeddedResource Include="Certificates\local.pfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Certificates\Create\README.txt" />
