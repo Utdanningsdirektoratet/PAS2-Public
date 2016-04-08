@@ -66,7 +66,8 @@ namespace UDIR.PAS2.Example.Client
                 rng.GetBytes(nonceBytes);
 
                 var nonce = Convert.ToBase64String(nonceBytes);
-                var timeStamp = DateTime.Now;
+				//timestamp should follow 'Round-trip date/time' pattern found here: https://msdn.microsoft.com/en-us/library/az4se3k1%28v=vs.110%29.aspx when serialized'
+				var timeStamp = DateTime.Now;
                 var clientIdentification = new ClientIdentification
                 {
                     Skoleorgno = ConfigurationManager.AppSettings["skoleorgno"],
@@ -109,7 +110,7 @@ namespace UDIR.PAS2.Example.Client
             xmlSignature.Sign();
 
             var signature = xmlSignature.ConvertToString();
-            //var validpayload = Convert.ToBase64String(Encoding.UTF8.GetBytes(signature));
+            var validpayload = Convert.ToBase64String(Encoding.UTF8.GetBytes(signature));
             var handler = new WebRequestHandler
             {
                 CookieContainer = new CookieContainer(),
