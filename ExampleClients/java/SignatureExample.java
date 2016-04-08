@@ -60,7 +60,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.net.ssl.HttpsURLConnection;	
+import javax.net.ssl.HttpsURLConnection;
 
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -75,7 +75,7 @@ public class SignatureExample {
 			if (cookie != null && !cookie.isEmpty()) {
 				issueRequestWithCookie(
 						baseAddress,"/api/ekstern/kandidat?orgno=874546852&periodekode=H-2015",
-						cookie);		
+						cookie);
 				logout(cookie );
 			}
 
@@ -86,22 +86,22 @@ public class SignatureExample {
 
 	private static void logout(String cookie)
 			throws MalformedURLException, ProtocolException, IOException{
-		
+
 		System.out.println("Now logging out...");
-		
+
 		URL obj = new URL(baseAddress + "/api/ekstern/utlogging");
 		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-		
+
 		// add the cookie
 		con.setRequestProperty("Cookie",cookie);
-		
+
 		// set content-length to 0
 		con.setFixedLengthStreamingMode(0);
-		
+
 		// set HTTP verb
 		con.setRequestMethod("POST");
 		con.setDoOutput(true);
-		
+
 		BufferedReader in = new BufferedReader(new InputStreamReader(
 				con.getInputStream()));
 		String inputLine;
@@ -110,29 +110,31 @@ public class SignatureExample {
 		while ((inputLine = in.readLine()) != null) {
 			response.append(inputLine);
 		}
-		in.close();	
+		in.close();
 	}
-	
+
 	private static String login(String baseAddress)
 			throws ParserConfigurationException, SAXException, IOException,
 			NoSuchAlgorithmException, InvalidAlgorithmParameterException,
 			KeyStoreException, CertificateException,
 			UnrecoverableEntryException, MarshalException,
 			XMLSignatureException, TransformerException {
-		
+
 		System.out.println("Requesting autentication cookie");
 
 		String nonce = getNonce();
-		Format formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		//timeStamp should follow 'Round-trip date/time pattern' from this page: https://msdn.microsoft.com/en-us/library/az4se3k1%28v=vs.110%29.aspx
+		//sample below assumes the time is given on a machine running in +2hours from GMT
+		Format formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+02:00");
 		String timeStamp = formatter.format(new Date());
 
 		String xmlString = String.format("<?xml version='1.0' encoding='UTF-8'?>"
 				+ "<ci:ClientIdentification xmlns:xs='http://www.w3.org/2001/XMLSchema' "
 				+ "xmlns:ci='http://pas.udir.no/ClientIdentification'>"
-				+ "<Skoleorgno>875561162</Skoleorgno> " 
+				+ "<Skoleorgno>875561162</Skoleorgno> "
 				+ "<Skolenavn>Eksempel skole</Skolenavn> "
 				+ "<Brukernavn>skoleadmin</Brukernavn> "
-				+ "<Nonce>%s</Nonce> " 
+				+ "<Nonce>%s</Nonce> "
 				+ "<TimeStamp>%s</TimeStamp> "
 				+ "</ci:ClientIdentification>", nonce, timeStamp);
 
@@ -247,10 +249,10 @@ public class SignatureExample {
 
 		URL obj = new URL(baseAddress + relativeAddress);
 		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-		
+
 		// add the cookie
 		con.setRequestProperty("Cookie",cookie);
-		
+
 		// optional default is GET
 		con.setRequestMethod("GET");
 
