@@ -1,4 +1,4 @@
-# Offentlig kode for den nye administrasjonstjenesten for eksamen
+# Offentlig kode for de nye administrasjonstjenestene for eksamen og prøver
 Kode for det nye administrasjonssystemet for eksamen som er åpent tilgjengelig og ment som hjelp til blant annet integrasjon.
 Vi vil legge ut nyttig informasjon i WIKI'en og dersom man har spørsmål eller opplever feil kan man rapportere det inn gjennom Github issues.
 
