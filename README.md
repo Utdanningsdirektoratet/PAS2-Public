@@ -13,6 +13,6 @@ Vi vil legge ut nyttig informasjon i WIKI'en og dersom man har spørsmål eller 
 - Dersom man har et spørsmål oppretter man også en issue for dette og legger på label 'question'. Allerede stilte spørsmål finnes [her](https://github.com/Utdanningsdirektoratet/PAS2-Public/issues?q=is%3Aquestion+is%3Aissue)
 
 #### Kontaktpersoner
-Vidar Kongsli (Systemarkitekt Administrasjonssystemet for eksamen)<br/>
-Espen Ekvang (Integrasjonsansvarlig Administrasjonssystemet for eksamen) <br/>
+Vidar Kongsli (Systemarkitekt Administrasjonssystemene for eksamen og prøver)<br/>
+Espen Ekvang (Integrasjonsansvarlig Administrasjonssystemene for eksamen og prøver) <br/>
 Nikolai Andersen (Teknisk ansvarlig PAS1)
