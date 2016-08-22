@@ -36,8 +36,8 @@ namespace UDIR.PAS2.OAuth.Client
 
 				if (tokenResponse.IsError)
 				{
-					throw new AuthenticationException(string.Format("Could not aquire access token. Reason:{0}, HttpStatusCode:{1}, HttpReason:{2}",
-						tokenResponse.Error, tokenResponse.HttpErrorStatusCode, tokenResponse.HttpErrorReason));
+					throw new AuthenticationException(
+						$"Could not aquire access token. Reason:{tokenResponse.Error}, HttpStatusCode:{tokenResponse.HttpErrorStatusCode}, HttpReason:{tokenResponse.HttpErrorReason}");
 				}
 				_bearerToken = new BearerToken(DateTimeOffset.UtcNow.AddSeconds(tokenResponse.ExpiresIn), tokenResponse.AccessToken);
 				Debug("Done fetching bearer token. Next expiry at {0:O}", _bearerToken.ExpiryTime);
