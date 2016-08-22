@@ -14,7 +14,7 @@ namespace UDIR.PAS2.OAuth.Client
 		{
 		}
 
-		public string TokenEndpoint { get; }
-		public Uri BaseAddress { get; }
+		public string TokenEndpoint { get; private set; }
+		public Uri BaseAddress { get; private set; }
 	}
 }
