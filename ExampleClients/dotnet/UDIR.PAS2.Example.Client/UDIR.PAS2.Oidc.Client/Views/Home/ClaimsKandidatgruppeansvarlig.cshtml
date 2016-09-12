@@ -1,0 +1,15 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+ //   Layout = "../Shared/_Layout";
+}
+@foreach (var claim in System.Security.Claims.ClaimsPrincipal.Current.Claims)
+{
+    <dt>
+        @claim.Type
+    </dt>
+    <dd>
+        @claim.Value
+    </dd>
+}
