@@ -54,9 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthenticatedClientOptions.cs" />
     <Compile Include="AuthenticatedHttpClientFactory.cs" />
-    <Compile Include="AuthorizationServer.cs" />
     <Compile Include="BearerToken.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +64,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UDIR.PAS2.OAuth.Lib\UDIR.PAS2.OAuth.Lib.csproj">
+      <Project>{dd9eba68-0121-4756-8baa-f4fb8e8e427c}</Project>
+      <Name>UDIR.PAS2.OAuth.Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

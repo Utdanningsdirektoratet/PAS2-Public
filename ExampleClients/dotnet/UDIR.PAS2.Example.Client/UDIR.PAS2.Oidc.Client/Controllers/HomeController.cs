@@ -14,9 +14,9 @@ namespace UDIR.Id.Test.RP.OpenId.Controllers
         }
 
         [Authorize]
-        public ActionResult ClaimsKandidatgruppeansvarlig()
+        public ActionResult Beskyttet()
         {
-            ViewBag.Message = "Kandidatgruppeansvarlig";
+            ViewBag.Message = "Beskyttet";
 
             return View();
         }
@@ -59,9 +59,9 @@ namespace UDIR.Id.Test.RP.OpenId.Controllers
             return View();
         }
 
-        private void AntiSpoof(string spoofProtection) {
+        private static void AntiSpoof(string spoofProtection) {
             var claimsIdentity = ClaimsPrincipal.Current.Identity as ClaimsIdentity;
-            var logoutClaim = claimsIdentity.FindFirst("logout_protect").Value;
+            var logoutClaim = claimsIdentity?.FindFirst("logout_protect").Value;
             if (spoofProtection != logoutClaim)
             {
                 throw new System.Exception("Spoof alert");

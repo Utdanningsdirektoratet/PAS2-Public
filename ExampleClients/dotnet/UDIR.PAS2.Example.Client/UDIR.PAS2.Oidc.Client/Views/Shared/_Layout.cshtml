@@ -27,13 +27,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("UDIR.Id.Test.RP.OpenId", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("UDIR.PAS2.Oidc.Client", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Claims-Kandidatgruppeansvarlig", "ClaimsKandidatgruppeansvarlig", "Home")</li>
-                    <li>@Html.ActionLink("Claims-Kandidat", "ClaimsKandidat", "Home")</li>
+                    <li>@Html.ActionLink("Beskyttet", "Beskyttet", "Home")</li>
                     @if (Request.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Logout", "Logout", "Home", new { spoofProtection = spoofProtection }, new { })</li>
