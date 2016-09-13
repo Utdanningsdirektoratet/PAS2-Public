@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Security.Authentication;
 using IdentityModel.Client;
+using UDIR.PAS2.OAuth.Lib;
 
 namespace UDIR.PAS2.OAuth.Client
 {

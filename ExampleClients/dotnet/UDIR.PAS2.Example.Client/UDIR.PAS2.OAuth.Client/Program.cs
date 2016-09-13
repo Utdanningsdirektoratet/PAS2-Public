@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Net;
+using UDIR.PAS2.OAuth.Lib;
 
 namespace UDIR.PAS2.OAuth.Client
 {

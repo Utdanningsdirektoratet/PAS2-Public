@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDIR.PAS2.Example.Client", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDIR.PAS2.OAuth.Client", "UDIR.PAS2.OAuth.Client\UDIR.PAS2.OAuth.Client.csproj", "{E7669042-CC17-4294-AFD4-B733456DCFE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDIR.PAS2.Oidc.Client", "UDIR.PAS2.Oidc.Client\UDIR.PAS2.Oidc.Client.csproj", "{3266B477-A734-4566-B442-83CEE840C192}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDIR.PAS2.OAuth.Lib", "UDIR.PAS2.OAuth.Lib\UDIR.PAS2.OAuth.Lib.csproj", "{DD9EBA68-0121-4756-8BAA-F4FB8E8E427C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{E7669042-CC17-4294-AFD4-B733456DCFE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7669042-CC17-4294-AFD4-B733456DCFE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7669042-CC17-4294-AFD4-B733456DCFE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3266B477-A734-4566-B442-83CEE840C192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3266B477-A734-4566-B442-83CEE840C192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3266B477-A734-4566-B442-83CEE840C192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3266B477-A734-4566-B442-83CEE840C192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD9EBA68-0121-4756-8BAA-F4FB8E8E427C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD9EBA68-0121-4756-8BAA-F4FB8E8E427C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD9EBA68-0121-4756-8BAA-F4FB8E8E427C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD9EBA68-0121-4756-8BAA-F4FB8E8E427C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
