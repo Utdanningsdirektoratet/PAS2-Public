@@ -35,7 +35,6 @@ task -name add-teamcity-reporting -precondition { return $runsOnBuildServer } -a
     }
 }
 
-
 task -name rebuild -depends clean, build
 
 task -name ensure-nuget -action {
@@ -44,18 +43,9 @@ task -name ensure-nuget -action {
     }
 }
 
-task -name ensure-ant -action {
+task -name compile_java -action {
     exec {
-        (get-psprovider 'FileSystem').Home = $(pwd)
-        if (-not((scoop list) -join ' ' -match " ant \([\d\.]+\)")) {
-            scoop install ant
-        }
-    }
-}
-
-task -name compile_java -depends ensure-ant -action {
-    exec {
-        ant -f $ant_buildfile
+        & "$env:ANT_HOME\bin\ant.bat" -f $ant_buildfile
     }
 }
 
