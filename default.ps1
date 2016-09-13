@@ -48,6 +48,7 @@ task -name ensure-ant -action {
     exec {
         get-command ant -ErrorAction SilentlyContinue | Out-Null
         if (!$?) {
+            (get-psprovider 'FileSystem').Home = $(pwd)
             scoop install ant
         }
     }
