@@ -46,9 +46,8 @@ task -name ensure-nuget -action {
 
 task -name ensure-ant -action {
     exec {
-        get-command ant -ErrorAction SilentlyContinue | Out-Null
-        if (!$?) {
-            (get-psprovider 'FileSystem').Home = $(pwd)
+        (get-psprovider 'FileSystem').Home = $(pwd)
+        if (-not((scoop list) -join ' ' -match " ant \([\d\.]+\)")) {
             scoop install ant
         }
     }
