@@ -12,15 +12,17 @@ namespace UDIR.PAS2.Example.Client.Extensions
         public static void Sign(this XmlDocument xmlDocument)
         {
             var certificate = ConfigurationManager.AppSettings["certificateToUse"];
-            
-            using (var stream = Assembly.GetExecutingAssembly()
+
+			var password = ConfigurationManager.AppSettings["certificatePassword"] ?? "";
+
+			using (var stream = Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream(certificate))
             {
                 if (stream == null) return;
 
                 var bytes = new byte[stream.Length];
                 stream.Read(bytes, 0, bytes.Length);
-                var signingCert = new X509Certificate2(bytes);
+                var signingCert = new X509Certificate2(bytes,password);
                 var signedXml = new SignedXml(xmlDocument);
                 var keyInfo = new KeyInfo();
                 var reference = new Reference { Uri = string.Empty };

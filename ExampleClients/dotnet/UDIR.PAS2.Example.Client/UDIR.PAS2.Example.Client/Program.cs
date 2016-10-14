@@ -100,6 +100,7 @@ namespace UDIR.PAS2.Example.Client
 			using (var client = new HttpClient(handler))
 			{
 				client.BaseAddress = new Uri(baseAddress);
+				client.Timeout = TimeSpan.FromMinutes(15);
 				var response = client.PostAsXmlAsync("/api/ekstern/kandidatpamelding", xmlDoc.DocumentElement).Result;
 				Console.WriteLine("StatusCode: {0}", response.StatusCode);
 			}
