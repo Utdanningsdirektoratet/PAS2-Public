@@ -144,15 +144,16 @@ namespace UDIR.PAS2.Example.Client
 				rng.GetBytes(nonceBytes);
 
 				var nonce = Convert.ToBase64String(nonceBytes);
+				//timestamp should follow 'Round-trip date/time' pattern found here: https://msdn.microsoft.com/en-us/library/az4se3k1%28v=vs.110%29.aspx when serialized'
 				var timeStamp = DateTime.Now;
-				var clientIdentification = new ClientIdentification
-				{
-					Skoleorgno = skoleOrgNr,
-					Skolenavn = "Eksempel skole",
-					Brukernavn = "skoleadmin",
-					Nonce = nonce,
-					TimeStamp = timeStamp
-				};
+                var clientIdentification = new ClientIdentification
+                {
+                    Skoleorgno = ConfigurationManager.AppSettings["skoleorgno"],
+                    Skolenavn = ConfigurationManager.AppSettings["skolenavn"],
+                    Brukernavn = ConfigurationManager.AppSettings["brukernavn"],
+                    Nonce = nonce,
+                    TimeStamp = timeStamp
+                };
 
 				string theSerializedString;
 				using (var ms = new MemoryStream())

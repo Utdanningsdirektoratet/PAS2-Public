@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "LogoutWithIFrame";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Logger ut...</h2>
+<iframe id="logoutIframe" src="@Url.Action("Logout", new { spoofProtection = ViewBag.Spoof })" height="0" width="0" ></iframe>
+
+@section scripts {
+    
+<script>
+$(function(){
+    $('#logoutIframe').ready(function () {
+        var iframe = $('#logoutIframe').get(0);
+        function checkIframe() {
+            console.log('Checking');
+            if (iframe.contentDocument) {
+                console.log('Can read iframe content');
+                if (iframe.contentDocument.URL.indexOf('AfterLogout') != -1) {
+                    console.log('landed at after logout');
+                    window.document.location = '@Url.Action("LogoutLocally", new { spoofProtection = ViewBag.Spoof })';
+                    return true;
+                } else {
+                    console.log('not landed yet');
+                }
+            }
+            setTimeout(checkIframe, 2000);
+            return false;
+        }
+        if (checkIframe()) {
+            console.log('Done');
+        } else {
+            console.log('Not don yet');
+        }
+    });
+})
+</script>
+}
+
+

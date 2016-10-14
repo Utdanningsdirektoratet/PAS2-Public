@@ -1,9 +1,9 @@
-# PAS2-Public
-Kode for PAS2 som er åpent tilgjengelig og ment som hjelp til blant annet integrasjon.
+# Offentlig kode for de nye administrasjonstjenestene for eksamen og prøver
+Kode for det nye administrasjonssystemet for eksamen som er åpent tilgjengelig og ment som hjelp til blant annet integrasjon.
 Vi vil legge ut nyttig informasjon i WIKI'en og dersom man har spørsmål eller opplever feil kan man rapportere det inn gjennom Github issues.
 
 ### Innhold:
-- [ExampleClients](ExampleClients) mappen innholder holder eksempel implementasjoner mot eksternt API eksponert av PAS
+- [ExampleClients](ExampleClients) mappen innholder holder eksempel implementasjoner mot eksternt API eksponert av eksamenssystemet.
 - [Material](Material) mappen vil inneholde presentasjoner/dokumenter som vi anser som nyttig for integrerende parter
 
 ### Hvordan bruke denne siden?
@@ -13,6 +13,6 @@ Vi vil legge ut nyttig informasjon i WIKI'en og dersom man har spørsmål eller 
 - Dersom man har et spørsmål oppretter man også en issue for dette og legger på label 'question'. Allerede stilte spørsmål finnes [her](https://github.com/Utdanningsdirektoratet/PAS2-Public/issues?q=is%3Aquestion+is%3Aissue)
 
 #### Kontaktpersoner
-Vidar Kongsli (Systemarkitekt PAS2)<br/>
-Espen Ekvang (Integrasjonsansvarlig PAS2) <br/>
+Vidar Kongsli (Systemarkitekt Administrasjonssystemene for eksamen og prøver)<br/>
+Espen Ekvang (Integrasjonsansvarlig Administrasjonssystemene for eksamen og prøver) <br/>
 Nikolai Andersen (Teknisk ansvarlig PAS1)
