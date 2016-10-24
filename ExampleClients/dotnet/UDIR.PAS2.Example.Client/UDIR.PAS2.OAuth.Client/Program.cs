@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Configuration;
 using System.Net;
+using System.Windows.Forms;
 using UDIR.PAS2.OAuth.Lib;
 
 namespace UDIR.PAS2.OAuth.Client
 {
 	internal class Program
 	{
+		[STAThread]
 		static void Main(string[] args)
 		{
 			var clientOptions = new AuthenticatedClientOptions
@@ -22,11 +24,19 @@ namespace UDIR.PAS2.OAuth.Client
 			try
 			{
 				var client = factory.GetHttpClient();
+				var bearerToken = client.DefaultRequestHeaders.Authorization;
+
 				var response = client.GetAsync("/api/ping").GetAwaiter().GetResult();
 				if (response.StatusCode == HttpStatusCode.OK)
 				{
-					Console.WriteLine("Successfully autenticated with IdSrv and sucessfully used bearer token to call API");
+					Clipboard.SetText(bearerToken.ToString());
+					Console.WriteLine("Authorization header er kopiert til utklipstavlen. Trykk en tast for å lukke dette vinduet");
 				}
+				else
+				{
+					Console.WriteLine("Klarte ikke å hente Bearertoken");
+				}
+				Console.ReadLine();
 			}
 			catch (Exception e)
 			{
