@@ -19,99 +19,31 @@ namespace UDIR.PAS2.Example.Client
 		[STAThread]
 		static void Main(string[] args)
 		{
+			Console.WriteLine(@"  _____         _____ ___        _____       _     _ _       ");
+			Console.WriteLine(@" |  __ \ /\    / ____|__ \      |  __ \     | |   | (_)      ");
+			Console.WriteLine(@" | |__) /  \  | (___    ) |_____| |__) |   _| |__ | |_  ___  ");
+			Console.WriteLine(@" |  ___/ /\ \  \___ \  / /______|  ___/ | | | '_ \| | |/ __| ");
+			Console.WriteLine(@" | |  / ____ \ ____) |/ /_      | |   | |_| | |_) | | | (__  ");
+			Console.WriteLine(@" |_| /_/    \_\_____/|____|     |_|    \__,_|_.__/|_|_|\___| ");
+			Console.WriteLine(@"                                                             ");
+			Console.WriteLine(@"                                                             ");
+
 			var baseAddress = ConfigurationManager.AppSettings["environmenturl"];
+			
+			Console.WriteLine($"Henter Cookie fra {baseAddress}");
 
-			if (args.Length == 1)
-			{
-				var path = args[0];
-				var fileEntries = GetAllXmlFilesRecursive(path);
-				Console.WriteLine("Kommer til å importere kandidater fra {0} filer til {1}, Trykk 'y' for å gjennomføre dette?",
-					fileEntries.Count, baseAddress);
+			var cookie = Login(baseAddress);
+			
+			Console.WriteLine($"Bruker Cookie til å kalle {baseAddress}/api/ekstern/whoami");
+			IssueRequestWithCookie(cookie, baseAddress, "api/ekstern/whoami");
 
-				if (!ShouldContinue())
-				{
-					Console.Error.WriteLine("Quitting...");
-					Environment.Exit(1);
-				}
-
-
-				foreach (var file in fileEntries)
-				{
-					ImportPåmelding(baseAddress, file);
-				}
-			}
-			else
-			{
-				var cookie = Login(baseAddress);
-				Clipboard.SetText(cookie.ToString());
-				Console.WriteLine("Cookie er kopiert til utklipstavlen. Trykk en tast for å lukke dette vinduet");
-				Console.ReadLine();
-			}
+			Clipboard.SetText(cookie.ToString());
+			Console.WriteLine("Cookie er kopiert til utklipstavlen. Trykk en tast for å lukke dette vinduet");
+			Console.ReadLine();
 		}
-
-		private static bool ShouldContinue()
-		{
-			var info = Console.ReadKey();
-			Console.WriteLine();
-			return info.Key == ConsoleKey.Y;
-		}
-
-
-		private static List<string> GetAllXmlFilesRecursive(string path)
-		{
-			var files = new List<string>();
-
-			if (File.Exists(path))
-			{
-				files.Add(path);
-				return files;
-			}
-
-			files.AddRange(Directory.GetFiles(path, "*.xml"));
-
-			foreach (var directory in Directory.GetDirectories(path))
-			{
-				files.AddRange(GetAllXmlFilesRecursive(directory));
-			}
-			return files;
-		}
-
-		private static void ImportPåmelding(string baseAddress, string xmlFile)
-		{
-			var xmlDoc = new XmlDocument();
-			xmlDoc.Load(xmlFile);
-
-			var skoleOrgNr = xmlDoc.GetElementsByTagName("pa:Orgnr")[0].InnerText;
-			Console.WriteLine("Melder på kandidatene i {0} til skole with orgNr: {1}", xmlFile, skoleOrgNr);
-
-			var cookie = Login(baseAddress, skoleOrgNr);
-			var cookieContainer = new CookieContainer();
-
-			if (cookie != null)
-				cookieContainer.Add(cookie);
-
-			var handler = new WebRequestHandler
-			{
-				CookieContainer = cookieContainer,
-				UseCookies = true,
-				UseDefaultCredentials = true
-			};
-
-			using (var client = new HttpClient(handler))
-			{
-				client.BaseAddress = new Uri(baseAddress);
-				client.Timeout = TimeSpan.FromMinutes(15);
-				var response = client.PostAsXmlAsync("/api/ekstern/kandidatpamelding", xmlDoc.DocumentElement).Result;
-				Console.WriteLine("StatusCode: {0}", response.StatusCode);
-			}
-
-		}
-
+		
 		private static void IssueRequestWithCookie(Cookie cookie, string baseAddress, string relativeAddress)
 		{
-			Console.WriteLine("Press enter to try to issue request with the newly obtained cookie");
-			Console.ReadLine();
-
 			var cookieContainer = new CookieContainer();
 
 			if (cookie != null)
@@ -128,13 +60,17 @@ namespace UDIR.PAS2.Example.Client
 			{
 				client.BaseAddress = new Uri(baseAddress);
 				var response = client.GetAsync(relativeAddress).Result;
-
+				
+				Console.WriteLine("");
+				Console.WriteLine("========================= RESPONS =========================");
 				Console.WriteLine(response);
 				Console.WriteLine(response.Content.ReadAsStringAsync().Result);
+				Console.WriteLine("====================== RESPONS SLUTT ======================");
+				Console.WriteLine("");
 			}
 		}
 
-		private static Cookie Login(string baseAddress, string skoleOrgNr = "974589664")
+		private static Cookie Login(string baseAddress)
 		{
 			var xmlSignature = new XmlDocument { PreserveWhitespace = true };
 
@@ -148,7 +84,7 @@ namespace UDIR.PAS2.Example.Client
 				var timeStamp = DateTime.Now;
 				var clientIdentification = new ClientIdentification
 				{
-					Skoleorgno = skoleOrgNr ?? ConfigurationManager.AppSettings["skoleorgno"],
+					Skoleorgno = ConfigurationManager.AppSettings["skoleorgno"],
 					Skolenavn = ConfigurationManager.AppSettings["skolenavn"],
 					Brukernavn = ConfigurationManager.AppSettings["brukernavn"],
 					Nonce = nonce,
@@ -204,7 +140,7 @@ namespace UDIR.PAS2.Example.Client
 				{
 					Console.Error.WriteLine("Response: " + response.StatusCode);
 					Console.Error.WriteLine("So quitting...");
-					Environment.Exit(1);
+					Environment.Exit(1); 
 				}
 
 				var allcookies = handler.CookieContainer.GetCookies(new Uri(baseAddress));
