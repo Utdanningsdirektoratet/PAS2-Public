@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDIR.PAS2.Example.Client", "UDIR.PAS2.Example.Client\UDIR.PAS2.Example.Client.csproj", "{DA5B8B5A-D8EA-4660-BB0D-7BD7E5C901FE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDIR.PAS2.OAuth.Client", "UDIR.PAS2.OAuth.Client\UDIR.PAS2.OAuth.Client.csproj", "{E7669042-CC17-4294-AFD4-B733456DCFE0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDIR.PAS2.Oidc.Client", "UDIR.PAS2.Oidc.Client\UDIR.PAS2.Oidc.Client.csproj", "{3266B477-A734-4566-B442-83CEE840C192}"
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DA5B8B5A-D8EA-4660-BB0D-7BD7E5C901FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA5B8B5A-D8EA-4660-BB0D-7BD7E5C901FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA5B8B5A-D8EA-4660-BB0D-7BD7E5C901FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA5B8B5A-D8EA-4660-BB0D-7BD7E5C901FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E7669042-CC17-4294-AFD4-B733456DCFE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E7669042-CC17-4294-AFD4-B733456DCFE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7669042-CC17-4294-AFD4-B733456DCFE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -36,5 +30,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EA3FFD77-AC37-44A5-96AA-22E7EE62A730}
 	EndGlobalSection
 EndGlobal

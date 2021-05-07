@@ -11,6 +11,15 @@ namespace UDIR.PAS2.OAuth.Client
 		[STAThread]
 		static void Main(string[] args)
 		{
+			Console.WriteLine(@"  _____         _____ ___        _____       _     _ _       ");
+			Console.WriteLine(@" |  __ \ /\    / ____|__ \      |  __ \     | |   | (_)      ");
+			Console.WriteLine(@" | |__) /  \  | (___    ) |_____| |__) |   _| |__ | |_  ___  ");
+			Console.WriteLine(@" |  ___/ /\ \  \___ \  / /______|  ___/ | | | '_ \| | |/ __| ");
+			Console.WriteLine(@" | |  / ____ \ ____) |/ /_      | |   | |_| | |_) | | | (__  ");
+			Console.WriteLine(@" |_| /_/    \_\_____/|____|     |_|    \__,_|_.__/|_|_|\___| ");
+			Console.WriteLine(@"                                                             ");
+			Console.WriteLine(@"                                                             ");
+
 			var clientOptions = new AuthenticatedClientOptions
 			{
 				AuthorizationServer = new AuthorizationServer(ConfigurationManager.AppSettings["IdSrv"]),
