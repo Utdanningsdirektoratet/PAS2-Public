@@ -1,1 +1,0 @@
-openssl req -new -x509 -days 1826 -key UDIR.PAS2.Dev.RootCa.key -out UDIR.PAS2.Dev.RootCA.crt -config ./openssl.cnf

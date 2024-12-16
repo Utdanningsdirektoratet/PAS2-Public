@@ -1,1 +1,0 @@
-openssl genrsa -out UDIR.PAS2.Dev.Client.key 4096
